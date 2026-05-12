@@ -31,6 +31,7 @@ int		ft_lstsize(t_list *head);
 
 void	ft_error(void);
 void	ft_check_args(int argc, char **argv);
+char	**get_args(int argc, char **argv);
 int		is_sorted(t_list **stack);
 int		get_distance(t_list **stack, int index);
 void	make_top(t_list **stack, int distance, t_bench *bench);

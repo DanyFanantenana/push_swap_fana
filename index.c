@@ -71,14 +71,10 @@ void	initstack(t_list **stack, int argc, char **argv)
 	char	**args;
 	int		i;
 
-	if (argc == 2)
-		i = 0;
-	else
-		i = 1;
-	if (argc == 2)
-		args = ft_split(argv[1], ' ');
-	else
-		args = argv;
+	i = 0;
+	args = get_args(argc, argv);
+	if (!args)
+		ft_error();
 	while (args[i])
 	{
 		new = ft_lstnew(ft_atoi(args[i]));
@@ -86,6 +82,5 @@ void	initstack(t_list **stack, int argc, char **argv)
 		i++;
 	}
 	index_stack(stack);
-	if (argc == 2)
-		ft_free(args);
+	ft_free(args);
 }
