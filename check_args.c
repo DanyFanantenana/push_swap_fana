@@ -29,8 +29,12 @@ static int	ft_isnum(char *num)
 	int	i;
 
 	i = 0;
+	if (!num[0])
+		return (0);
 	if (num[0] == '-')
 		i++;
+	if (!num[i])
+		return (0);
 	while (num[i])
 	{
 		if (!ft_isdigit(num[i]))
