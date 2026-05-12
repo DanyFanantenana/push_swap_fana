@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-void	simple_sort(t_list **stack_a, t_list **stack_b)
+void	simple_sort(t_list **stack_a, t_list **stack_b, t_bench *bench)
 {
 	int	size;
 
@@ -21,13 +21,13 @@ void	simple_sort(t_list **stack_a, t_list **stack_b)
 		return ;
 	size = ft_lstsize(*stack_a);
 	if (size == 2)
-		sa(stack_a);
+		sa(stack_a, bench);
 	else if (size == 3)
-		sort_3(stack_a);
+		sort_3(stack_a, bench);
 	else if (size == 4)
-		sort_4(stack_a, stack_b);
+		sort_4(stack_a, stack_b, bench);
 	else if (size == 5)
-		sort_5(stack_a, stack_b);
+		sort_5(stack_a, stack_b, bench);
 	else
-		radix_sort(stack_a, stack_b);
+		radix_sort(stack_a, stack_b, bench);
 }

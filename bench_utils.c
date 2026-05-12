@@ -85,13 +85,12 @@ float	compute_disorder(t_list **a)
 
 void	exec_algo(char *flag, t_list **a, t_list **b, t_bench *bench)
 {
-	g_current_bench = bench;
 	if (!ft_strcmp(flag, "--simple"))
-		simple_sort(a, b);
+		simple_sort(a, b, bench);
 	else if (!ft_strcmp(flag, "--medium"))
-		medium_sort(a, b);
+		medium_sort(a, b, bench);
 	else if (!ft_strcmp(flag, "--complex"))
-		radix_sort(a, b);
+		radix_sort(a, b, bench);
 	else
-		radix_sort(a, b);
+		radix_sort(a, b, bench);
 }

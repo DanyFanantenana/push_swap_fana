@@ -35,34 +35,34 @@ int	swap(t_list **stack)
 	return (0);
 }
 
-int	sa(t_list **stack_a)
+int	sa(t_list **stack_a, t_bench *bench)
 {
 	if (swap(stack_a) == -1)
 		return (-1);
-	if (g_current_bench)
-		bench_sa(g_current_bench);
+	if (bench)
+		bench_sa(bench);
 	ft_putendl_fd("sa", 1);
 	return (0);
 }
 
-int	sb(t_list **stack_b)
+int	sb(t_list **stack_b, t_bench *bench)
 {
 	if (swap(stack_b) == -1)
 		return (-1);
-	if (g_current_bench)
-		bench_sb(g_current_bench);
+	if (bench)
+		bench_sb(bench);
 	ft_putendl_fd("sb", 1);
 	return (0);
 }
 
-int	ss(t_list **stack_a, t_list **stack_b)
+int	ss(t_list **stack_a, t_list **stack_b, t_bench *bench)
 {
 	if ((ft_lstsize(*stack_a) < 2) || (ft_lstsize(*stack_b) < 2))
 		return (-1);
 	swap(stack_a);
 	swap(stack_b);
-	if (g_current_bench)
-		bench_ss(g_current_bench);
+	if (bench)
+		bench_ss(bench);
 	ft_putendl_fd("ss", 1);
 	return (0);
 }

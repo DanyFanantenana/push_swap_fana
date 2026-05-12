@@ -29,8 +29,12 @@ static int	ft_isnum(char *num)
 	int	i;
 
 	i = 0;
+	if (!num[0])
+		return (0);
 	if (num[0] == '-')
 		i++;
+	if (!num[i])
+		return (0);
 	while (num[i])
 	{
 		if (!ft_isdigit(num[i]))
@@ -40,7 +44,7 @@ static int	ft_isnum(char *num)
 	return (1);
 }
 
-static void	validate_arg(char *arg, char **args, int index, int should_free)
+static void	validate_arg(char *arg, char **args, int index)
 {
 	long	tmp;
 
@@ -48,42 +52,44 @@ static void	validate_arg(char *arg, char **args, int index, int should_free)
 	if (!ft_isnum(arg) || ft_contains(tmp, args, index)
 		|| tmp < -2147483648 || tmp > 2147483647)
 	{
-		if (should_free)
-			ft_free(args);
+		ft_free(args);
 		ft_error();
 	}
 }
 
-static char	**prepare_args(int argc, char **argv, int *start, int *should_free)
+static int	has_empty_arg(int argc, char **argv)
 {
-	if (argc == 2)
+	int	i;
+
+	i = 1;
+	while (i < argc)
 	{
-		*should_free = 1;
-		*start = 0;
-		return (ft_split(argv[1], ' '));
+		if (!argv[i][0])
+			return (1);
+		i++;
 	}
-	*should_free = 0;
-	*start = 1;
-	return (argv);
+	return (0);
 }
 
 void	ft_check_args(int argc, char **argv)
 {
 	int		i;
-	int		should_free;
 	char	**args;
 
-	args = prepare_args(argc, argv, &i, &should_free);
-	if (should_free && !args[0])
+	if (has_empty_arg(argc, argv))
+		ft_error();
+	args = get_args(argc, argv);
+	if (!args || !args[0])
 	{
-		ft_free(args);
+		if (args)
+			ft_free(args);
 		ft_error();
 	}
+	i = 0;
 	while (args[i])
 	{
-		validate_arg(args[i], args, i, should_free);
+		validate_arg(args[i], args, i);
 		i++;
 	}
-	if (should_free)
-		ft_free(args);
+	ft_free(args);
 }

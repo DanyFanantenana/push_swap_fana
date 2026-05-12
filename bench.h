@@ -51,6 +51,4 @@ void					exec_algo(char *flag, t_list **a, t_list **b,
 void					ft_adaptive_algo(t_list **stack_a, t_list **stack_b,
 							t_bench *bench);
 
-extern char				*g_algo_flag;
-
 #endif

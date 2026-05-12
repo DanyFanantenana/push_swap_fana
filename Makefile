@@ -13,7 +13,7 @@
 NAME = push_swap
 CHECK = checker
 
-ALL_SRCS = check_args.c ft_atoi.c ft_isdigit.c \
+ALL_SRCS = check_args.c args.c ft_atoi.c ft_isdigit.c \
 		ft_putendl_fd.c ft_putnbr_fd.c ft_split.c ft_strcmp.c \
 		index.c push.c swap.c rotate.c revrotate.c radix.c simple.c \
 		simple_sort.c medium.c get_next_line.c get_next_line_utils.c \

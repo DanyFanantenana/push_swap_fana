@@ -36,34 +36,34 @@ int	reverserotate(t_list **stack)
 	return (0);
 }
 
-int	rra(t_list **stack_a)
+int	rra(t_list **stack_a, t_bench *bench)
 {
 	if (reverserotate(stack_a) == -1)
 		return (-1);
-	if (g_current_bench)
-		bench_rra(g_current_bench);
+	if (bench)
+		bench_rra(bench);
 	ft_putendl_fd("rra", 1);
 	return (0);
 }
 
-int	rrb(t_list **stack_b)
+int	rrb(t_list **stack_b, t_bench *bench)
 {
 	if (reverserotate(stack_b) == -1)
 		return (-1);
-	if (g_current_bench)
-		bench_rrb(g_current_bench);
+	if (bench)
+		bench_rrb(bench);
 	ft_putendl_fd("rrb", 1);
 	return (0);
 }
 
-int	rrr(t_list **stack_a, t_list **stack_b)
+int	rrr(t_list **stack_a, t_list **stack_b, t_bench *bench)
 {
 	if ((ft_lstsize(*stack_a) < 2) || (ft_lstsize(*stack_b) < 2))
 		return (-1);
 	reverserotate(stack_a);
 	reverserotate(stack_b);
-	if (g_current_bench)
-		bench_rrr(g_current_bench);
+	if (bench)
+		bench_rrr(bench);
 	ft_putendl_fd("rrr", 1);
 	return (0);
 }
