@@ -28,6 +28,18 @@ static int	get_min(t_list **stack, int val)
 	return (min);
 }
 
+static void	finish_sort_3(t_list **stack_a, t_list *head, int min,
+	t_bench *bench)
+{
+	if (head->next->index == min)
+		ra(stack_a, bench);
+	else
+	{
+		sa(stack_a, bench);
+		rra(stack_a, bench);
+	}
+}
+
 static void	handle_sort_3_cases(t_list **stack_a, t_list *head,
 	t_bench *bench)
 {
@@ -50,15 +62,7 @@ static void	handle_sort_3_cases(t_list **stack_a, t_list *head,
 			rra(stack_a, bench);
 	}
 	else
-	{
-		if (head->next->index == min)
-			ra(stack_a, bench);
-		else
-		{
-			sa(stack_a, bench);
-			rra(stack_a, bench);
-		}
-	}
+		finish_sort_3(stack_a, head, min, bench);
 }
 
 void	sort_3(t_list **stack_a, t_bench *bench)
