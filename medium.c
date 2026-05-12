@@ -77,34 +77,40 @@ static int	find_max_pos(t_list *stack_b)
 	return (pos);
 }
 
+static void	move_max_to_top(t_list **stack_b, int pos, int size,
+	t_bench *bench)
+{
+	int	j;
+
+	j = 0;
+	if (pos <= size / 2)
+	{
+		while (j < pos)
+		{
+			rb(stack_b, bench);
+			j++;
+		}
+	}
+	else
+	{
+		while (j < size - pos)
+		{
+			rrb(stack_b, bench);
+			j++;
+		}
+	}
+}
+
 static void	push_back_sorted(t_list **stack_a, t_list **stack_b, t_bench *bench)
 {
 	int	size;
 	int	pos;
-	int	j;
 
 	while (ft_lstsize(*stack_b) > 0)
 	{
 		size = ft_lstsize(*stack_b);
 		pos = find_max_pos(*stack_b);
-		if (pos <= size / 2)
-		{
-			j = 0;
-			while (j < pos)
-			{
-				rb(stack_b, bench);
-				j++;
-			}
-		}
-		else
-		{
-			j = 0;
-			while (j < size - pos)
-			{
-				rrb(stack_b, bench);
-				j++;
-			}
-		}
+		move_max_to_top(stack_b, pos, size, bench);
 		pa(stack_a, stack_b, bench);
 	}
 }
