@@ -18,11 +18,10 @@ void	ft_adaptive_algo(t_list **a, t_list **b, t_bench *bench)
 	float	disorder;
 
 	disorder = compute_disorder(a);
-	g_current_bench = bench;
 	if (disorder < 0.2)
-		simple_sort(a, b);
+		simple_sort(a, b, bench);
 	else if (disorder < 0.5)
-		medium_sort(a, b);
+		medium_sort(a, b, bench);
 	else
-		radix_sort(a, b);
+		radix_sort(a, b, bench);
 }

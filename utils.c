@@ -61,7 +61,7 @@ int	get_distance(t_list **stack, int index)
 	return (distance);
 }
 
-void	make_top(t_list **stack, int distance)
+void	make_top(t_list **stack, int distance, t_bench *bench)
 {
 	t_list	*head;
 	int		tmp;
@@ -73,11 +73,11 @@ void	make_top(t_list **stack, int distance)
 	if (distance <= (ft_lstsize(head) / 2))
 	{
 		while (distance-- > 0)
-			ra(stack);
+			ra(stack, bench);
 	}
 	else
 	{
 		while (tmp-- > 0)
-			rra(stack);
+			rra(stack, bench);
 	}
 }

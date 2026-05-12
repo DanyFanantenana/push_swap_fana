@@ -15,23 +15,21 @@
 #include "get_next_line.h"
 #include "libft.h"
 
-int		g_is_bench = 0;
-
 static void	sort_stack(t_list **stack_a, t_list **stack_b, char *algo_flag)
 {
 	if (algo_flag)
 	{
 		if (!ft_strcmp(algo_flag, "--simple"))
-			simple_sort(stack_a, stack_b);
+			simple_sort(stack_a, stack_b, NULL);
 		else if (!ft_strcmp(algo_flag, "--medium"))
-			medium_sort(stack_a, stack_b);
+			medium_sort(stack_a, stack_b, NULL);
 		else if (!ft_strcmp(algo_flag, "--complex"))
-			radix_sort(stack_a, stack_b);
+			radix_sort(stack_a, stack_b, NULL);
 	}
 	else if (ft_lstsize(*stack_a) <= 5)
-		simple_sort(stack_a, stack_b);
+		simple_sort(stack_a, stack_b, NULL);
 	else
-		radix_sort(stack_a, stack_b);
+		radix_sort(stack_a, stack_b, NULL);
 }
 
 static void	remove_arg_at_index(int *argc, char **argv, int index)
@@ -48,18 +46,18 @@ static void	remove_arg_at_index(int *argc, char **argv, int index)
 	argv[*argc] = NULL;
 }
 
-static int	parse_args(int *argc, char **argv, char **algo_flag)
+static int	parse_args(int *argc, char **argv, char **algo_flag, int *is_bench)
 {
 	int	i;
 
 	i = 1;
 	*algo_flag = NULL;
-	g_is_bench = 0;
+	*is_bench = 0;
 	while (i < *argc)
 	{
 		if (!ft_strcmp(argv[i], "--bench"))
 		{
-			g_is_bench = 1;
+			*is_bench = 1;
 			remove_arg_at_index(argc, argv, i);
 			continue ;
 		}
@@ -90,9 +88,9 @@ int	main(int argc, char **argv)
 	t_list	**stack_a;
 	t_list	**stack_b;
 	char	*algo_flag;
-	t_bench	bench;
+	int		is_bench;
 
-	if (!parse_args(&argc, argv, &algo_flag))
+	if (!parse_args(&argc, argv, &algo_flag, &is_bench))
 		return (-1);
 	ft_check_args(argc, argv);
 	init_stacks(&stack_a, &stack_b);
@@ -103,10 +101,10 @@ int	main(int argc, char **argv)
 		free_stack(stack_b);
 		return (0);
 	}
-	if (g_is_bench)
+	if (is_bench)
 		run_benchmark(stack_a, stack_b, algo_flag);
 	else if (algo_flag && !ft_strcmp(algo_flag, "--adaptive"))
-		ft_adaptive_algo(stack_a, stack_b, &bench);
+		ft_adaptive_algo(stack_a, stack_b, NULL);
 	else
 		sort_stack(stack_a, stack_b, algo_flag);
 	free_stack(stack_a);

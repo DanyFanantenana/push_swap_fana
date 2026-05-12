@@ -13,8 +13,6 @@
 #include "bench.h"
 #include "push_swap.h"
 
-t_bench	*g_current_bench = NULL;
-
 static void	print_bench_details(t_bench *bench)
 {
 	ft_putstr_fd("[bench] sa: ", 2);
